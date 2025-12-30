@@ -3,6 +3,12 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --bggrey: #628bba;
+  --snowred: #D1403F;
+  --snowgreen: #90BA45;
+  --snowyellow: #FBED4F;
+  --snowyellow-dark: #F8DA59;
+  --snowblue: #3579BA;
 }
 
 @theme inline {
@@ -10,6 +16,12 @@
   --color-foreground: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
+  --color-bggrey: var(--bggrey);
+  --color-snowred: var(--snowred);
+  --color-snowgreen: var(--snowgreen);
+  --color-snowyellow: var(--snowyellow);
+  --color-snowyellow-dark: var(--snowyellow-dark);
+  --color-snowblue: var(--snowblue);
 }
 
 

@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": [],
+  "sections": [
+    {"offset": {"line": 4, "column": 0}, "map": {"version":3,"sources":["file:///app/app/page.tsx"],"sourcesContent":["\"use client\"\n\nimport { useEffect, useState } from \"react\"\nimport { loadRaffle, saveRaffle, pickWinner } from \"@/lib/api/raffle\"\nimport { Raffle, RaffleEntry } from \"@/types/raffle\"\nimport { v4 as uuid } from \"uuid\"\n\nexport default function HomePage() {\n  const [raffle, setRaffle] = useState<Raffle | null>(null)\n  const [input, setInput] = useState(\"\")\n  const [winner, setWinner] = useState<RaffleEntry | null>(null)\n\n\n  return (\n    <main>\n      Test\n    </main>\n  )\n}\n"],"names":[],"mappings":";;;;;AAEA;AAFA;;;AAOe,SAAS;IACtB,MAAM,CAAC,QAAQ,UAAU,GAAG,IAAA,iNAAQ,EAAgB;IACpD,MAAM,CAAC,OAAO,SAAS,GAAG,IAAA,iNAAQ,EAAC;IACnC,MAAM,CAAC,QAAQ,UAAU,GAAG,IAAA,iNAAQ,EAAqB;IAGzD,qBACE,8OAAC;kBAAK;;;;;;AAIV"}},
+    {"offset": {"line": 29, "column": 0}, "map": {"version":3,"sources":["file:///app/node_modules/next/src/server/route-modules/app-page/vendored/ssr/react-jsx-dev-runtime.ts"],"sourcesContent":["module.exports = (\n  require('../../module.compiled') as typeof import('../../module.compiled')\n).vendored['react-ssr']!.ReactJsxDevRuntime\n"],"names":["module","exports","require","vendored","ReactJsxDevRuntime"],"mappings":"AAAAA,OAAOC,OAAO,GACZC,QAAQ,4HACRC,QAAQ,CAAC,YAAY,CAAEC,kBAAkB","ignoreList":[0]}}]
+}
