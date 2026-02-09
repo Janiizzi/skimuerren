@@ -1,20 +1,36 @@
-import { Raffle } from "@/types/raffle"
 import { apiFetch } from "./client"
-import { RaffleEntry } from "@/types/raffle"
+import { DrawResponse, Raffle, RafflePayload } from "@/types/raffle"
 
-export function loadRaffle() {
-  return apiFetch<Raffle | null>("/raffle")
+export function listRaffles() {
+  return apiFetch<Raffle[]>("/raffles")
 }
 
-export function saveRaffle(raffle: Raffle) {
-  return apiFetch("/raffle", {
+export function getRaffle(id: string) {
+  return apiFetch<Raffle>(`/raffles/${id}`)
+}
+
+export function createRaffle(payload: RafflePayload) {
+  return apiFetch<Raffle>("/raffles", {
     method: "POST",
-    body: JSON.stringify(raffle),
+    body: JSON.stringify(payload),
   })
 }
 
-export function pickWinner() {
-  return apiFetch<RaffleEntry>("/raffle/pick", {
+export function updateRaffle(id: string, payload: RafflePayload) {
+  return apiFetch<Raffle>(`/raffles/${id}`, {
+    method: "PUT",
+    body: JSON.stringify(payload),
+  })
+}
+
+export function drawEntry(id: string) {
+  return apiFetch<DrawResponse>(`/raffles/${id}/draw`, {
+    method: "POST",
+  })
+}
+
+export function resetRaffle(id: string) {
+  return apiFetch<Raffle>(`/raffles/${id}/reset`, {
     method: "POST",
   })
 }

@@ -68,10 +68,6 @@ const pages = [
         path: "/"
     },
     {
-        name: "Auslosung",
-        path: "/raffle"
-    },
-    {
         name: "Bearbeiten",
         path: "/edit"
     }
@@ -93,55 +89,51 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$imag
 ;
 ;
 const Header = ()=>{
-    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-        className: "flex p-4 mx-4",
+    return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("header", {
+        className: "mx-auto mt-4 flex max-w-6xl items-center justify-between rounded-3xl bg-white/70 px-6 py-4 shadow-lg shadow-snowblue/10 backdrop-blur",
         children: [
-            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                className: "flex-grow font-bold text-2xl",
-                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
-                    href: "/",
-                    className: "flex items-center gap-2",
-                    children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
+                href: "/",
+                className: "flex items-center gap-3 text-2xl font-semibold text-snowblue",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$image$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
                         src: "/skischule_muerren_de.png",
                         alt: "Skischule Mürren Logo",
-                        width: 40,
-                        height: 40
+                        width: 42,
+                        height: 42
                     }, void 0, false, {
                         fileName: "[project]/components/Header.tsx",
-                        lineNumber: 11,
+                        lineNumber: 10,
                         columnNumber: 17
-                    }, ("TURBOPACK compile-time value", void 0))
-                }, void 0, false, {
-                    fileName: "[project]/components/Header.tsx",
-                    lineNumber: 10,
-                    columnNumber: 13
-                }, ("TURBOPACK compile-time value", void 0))
-            }, void 0, false, {
+                    }, ("TURBOPACK compile-time value", void 0)),
+                    "Skischule Mürren"
+                ]
+            }, void 0, true, {
                 fileName: "[project]/components/Header.tsx",
                 lineNumber: 9,
-                columnNumber: 9
+                columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0)),
             /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])("nav", {
-                className: "flex gap-4 items-center",
+                className: "flex items-center gap-3 text-sm font-semibold",
                 children: __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$navigation$2e$ts__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["pages"].map((page)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$rsc$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$react$2d$server$2e$js__$5b$app$2d$rsc$5d$__$28$ecmascript$29$__["default"], {
                         href: page.path,
-                        className: "text-black flex hover:bg-snowred/30 px-2 rounded-lg p-1",
+                        className: "rounded-full px-4 py-2 text-slate-600 transition hover:bg-snowblue/15 hover:text-snowblue",
                         children: page.name
                     }, page.path, false, {
                         fileName: "[project]/components/Header.tsx",
-                        lineNumber: 16,
-                        columnNumber: 17
+                        lineNumber: 15,
+                        columnNumber: 21
                     }, ("TURBOPACK compile-time value", void 0)))
             }, void 0, false, {
                 fileName: "[project]/components/Header.tsx",
-                lineNumber: 14,
-                columnNumber: 9
+                lineNumber: 13,
+                columnNumber: 13
             }, ("TURBOPACK compile-time value", void 0))
         ]
     }, void 0, true, {
         fileName: "[project]/components/Header.tsx",
         lineNumber: 8,
-        columnNumber: 5
+        columnNumber: 9
     }, ("TURBOPACK compile-time value", void 0));
 };
 const __TURBOPACK__default__export__ = Header;
@@ -2876,7 +2868,11 @@ function getImageProps(imgProps) {
                 ("TURBOPACK compile-time value", 384)
             ]),
             "qualities": ("TURBOPACK compile-time value", [
-                ("TURBOPACK compile-time value", 75)
+                ("TURBOPACK compile-time value", 75),
+                ("TURBOPACK compile-time value", 70),
+                ("TURBOPACK compile-time value", 70),
+                ("TURBOPACK compile-time value", 70),
+                ("TURBOPACK compile-time value", 70)
             ]),
             "path": ("TURBOPACK compile-time value", "/_next/image"),
             "loader": ("TURBOPACK compile-time value", "default"),

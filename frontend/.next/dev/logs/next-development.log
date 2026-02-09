@@ -1,1 +1,15 @@
-[00:00:00.683] Server  LOG     ✓ Ready in 481ms
+[00:00:00.786] Server  LOG     ✓ Ready in 611ms
+[00:00:04.805] Server  LOG     ○ Compiling /edit ...
+[00:19:45.436] Server  LOG     ✓ Compiled in 107ms
+[00:20:33.770] Server  LOG     ✓ Compiled in 74ms
+[00:20:33.772] Server  WARN    ⚠ Fast Refresh had to perform a full reload when ./node_modules/next/dist/client/image-component.js changed. Read more: https://nextjs.org/docs/messages/fast-refresh-reload
+[00:20:33.835] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/. Falling back to browser navigation. {}
+[00:20:33.835] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/. Falling back to browser navigation. {}
+[00:20:33.835] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/. Falling back to browser navigation. {}
+[00:20:33.835] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/. Falling back to browser navigation. {}
+[00:20:33.835] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/. Falling back to browser navigation. {}
+[00:20:33.835] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/. Falling back to browser navigation. {}
+[00:20:33.835] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/. Falling back to browser navigation. {}
+[00:20:33.835] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/. Falling back to browser navigation. {}
+[00:20:33.835] Browser ERROR   Failed to fetch RSC payload for http://localhost:3000/. Falling back to browser navigation. {}
+[00:20:34.795] Server  LOG     ✓ Compiled in 74ms
