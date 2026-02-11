@@ -23,8 +23,9 @@ jobs:
 
       - name: Set image names (lowercase)
         run: |
+          repo_name=${GITHUB_REPOSITORY#*/}
           echo "OWNER_LC=${GITHUB_REPOSITORY_OWNER,,}" >> $GITHUB_ENV
-          echo "REPO_LC=${GITHUB_REPOSITORY#*/}" >> $GITHUB_ENV
+          echo "REPO_LC=${repo_name,,}" >> $GITHUB_ENV
 
       - name: Build & Push Backend
         uses: docker/build-push-action@v6
