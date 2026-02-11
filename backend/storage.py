@@ -1,10 +1,13 @@
 import json
+import os
 from pathlib import Path
 from typing import List
 
 from models import Raffle
 
-STORAGE_FILE = Path(__file__).with_name("raffles.json")
+_DEFAULT_STORAGE_FILE = Path(__file__).with_name("raffles.json")
+_configured_path = os.environ.get("RAFFLES_STORAGE_PATH")
+STORAGE_FILE = Path(_configured_path) if _configured_path else _DEFAULT_STORAGE_FILE
 
 
 def _read_all() -> List[Raffle]:

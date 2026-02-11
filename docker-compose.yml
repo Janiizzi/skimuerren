@@ -3,6 +3,10 @@ services:
     build: ./backend
     ports:
       - "8000:8000"
+    environment:
+      - RAFFLES_STORAGE_PATH=/app/data/raffles.json
+    volumes:
+      - ./backend/data:/app/data
 
   frontend:
     build: ./frontend
