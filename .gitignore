@@ -16,7 +16,12 @@
 
 # next.js
 /.next/
+**/.next/
 /out/
+
+# backend persistence
+backend/data/
+!backend/data/.gitkeep
 
 # production
 /build

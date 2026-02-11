@@ -1,3 +1,4 @@
+import os
 import random
 from datetime import datetime
 from uuid import uuid4
@@ -8,11 +9,14 @@ from fastapi.middleware.cors import CORSMiddleware
 from models import DrawResult, Raffle, RaffleEntry, RafflePayload
 from storage import get_raffle, list_raffles, save_raffle
 
+_default_origins = os.environ.get("FRONTEND_ORIGINS", "http://localhost:3000")
+ALLOWED_ORIGINS = [origin.strip() for origin in _default_origins.split(",") if origin.strip()]
+
 app = FastAPI()
 
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["http://localhost:3000"],
+    allow_origins=ALLOWED_ORIGINS,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
