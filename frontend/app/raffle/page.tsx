@@ -28,7 +28,9 @@ const RaffleOverviewPage = () => {
           {raffles.map((raffle) => {
             const drawnCount = raffle.entries.filter((entry) => entry.drawIndex !== undefined && entry.drawIndex !== null).length
             const progress = raffle.entries.length ? Math.round((drawnCount / raffle.entries.length) * 100) : 0
-            const lastWinner = raffle.entries.find((entry) => entry.id === raffle.lastDrawnEntryId)
+            const lastWinner = raffle.entries
+              .filter((entry) => entry.id === raffle.lastDrawnEntryId)
+              .at(0)
 
             return (
               <div key={raffle.id} className="rounded-3xl border border-slate-100 bg-white/85 p-5 shadow-xl shadow-snowblue/10">

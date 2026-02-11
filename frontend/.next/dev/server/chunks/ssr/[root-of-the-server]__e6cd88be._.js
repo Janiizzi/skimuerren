@@ -98,8 +98,14 @@ var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/client/app-dir/link.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$navigation$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/navigation.js [app-ssr] (ecmascript)");
 var __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/node_modules/next/dist/server/route-modules/app-page/vendored/ssr/react.js [app-ssr] (ecmascript)");
+(()=>{
+    const e = new Error("Cannot find module '@lottiefiles/dotlottie-react'");
+    e.code = 'MODULE_NOT_FOUND';
+    throw e;
+})();
 var __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$api$2f$raffle$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__ = __turbopack_context__.i("[project]/lib/api/raffle.ts [app-ssr] (ecmascript)");
 "use client";
+;
 ;
 ;
 ;
@@ -117,6 +123,7 @@ function RaffleDetailPage() {
     const [loadingReset, setLoadingReset] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const [highlighted, setHighlighted] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(null);
     const [tickerStep, setTickerStep] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(0);
+    const [showDrawAnimation, setShowDrawAnimation] = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useState"])(false);
     const remainingEntries = (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["useMemo"])(()=>{
         if (!raffle) return [];
         return raffle.entries.filter((entry)=>entry.drawIndex === undefined || entry.drawIndex === null);
@@ -173,14 +180,17 @@ function RaffleDetailPage() {
     const handleDraw = async ()=>{
         if (!raffle) return;
         setLoadingDraw(true);
+        setShowDrawAnimation(true);
         setError(null);
         try {
             const result = await (0, __TURBOPACK__imported__module__$5b$project$5d2f$lib$2f$api$2f$raffle$2e$ts__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["drawEntry"])(raffle.id);
             setRaffleState(result.raffle);
         } catch (err) {
             setError(err instanceof Error ? err.message : "Unbekannter Fehler");
+            setShowDrawAnimation(false);
         } finally{
             setLoadingDraw(false);
+            setTimeout(()=>setShowDrawAnimation(false), 1800);
         }
     };
     const handleReset = async ()=>{
@@ -205,329 +215,332 @@ function RaffleDetailPage() {
     ] : [];
     const activeTickerEntry = remainingEntries.length ? remainingEntries[offset] : null;
     return /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("main", {
-        className: "min-h-screen bg-gradient-to-b from-[#cfe6ff] via-white to-[#fdfbff] pb-16",
-        children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-            className: "mx-auto max-w-6xl px-4 pt-8",
-            children: [
-                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "flex flex-wrap items-start justify-between gap-4",
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-xs uppercase tracking-[0.4em] text-slate-500",
-                                    children: "Animierte Auslosung"
-                                }, void 0, false, {
-                                    fileName: "[project]/app/raffle/[id]/page.tsx",
-                                    lineNumber: 111,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
-                                    className: "mt-2 text-3xl font-semibold text-snowblue",
-                                    children: raffle ? raffle.name : isLoading ? "Lade…" : "Unbekanntes Raffle"
-                                }, void 0, false, {
-                                    fileName: "[project]/app/raffle/[id]/page.tsx",
-                                    lineNumber: 112,
-                                    columnNumber: 13
-                                }, this),
-                                raffle?.description && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-sm text-slate-500",
-                                    children: raffle.description
-                                }, void 0, false, {
-                                    fileName: "[project]/app/raffle/[id]/page.tsx",
-                                    lineNumber: 115,
-                                    columnNumber: 37
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/app/raffle/[id]/page.tsx",
-                            lineNumber: 110,
-                            columnNumber: 11
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                            className: "flex flex-wrap gap-3 text-sm",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                                    href: "/",
-                                    className: "rounded-full border border-snowblue/30 px-4 py-2 text-snowblue hover:border-snowblue",
-                                    children: "Zur Übersicht"
-                                }, void 0, false, {
-                                    fileName: "[project]/app/raffle/[id]/page.tsx",
-                                    lineNumber: 118,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                    onClick: handleReset,
-                                    disabled: !raffle || loadingReset,
-                                    className: "rounded-full border border-snowblue/40 px-4 py-2 text-snowblue transition hover:border-snowblue disabled:cursor-not-allowed disabled:border-slate-200 disabled:text-slate-300",
-                                    children: loadingReset ? "Setze zurück…" : "Topf leeren"
-                                }, void 0, false, {
-                                    fileName: "[project]/app/raffle/[id]/page.tsx",
-                                    lineNumber: 121,
-                                    columnNumber: 13
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
-                                    onClick: handleDraw,
-                                    disabled: !raffle || !remainingEntries.length || loadingDraw,
-                                    className: "rounded-full bg-snowblue px-5 py-2 font-semibold text-white transition hover:bg-snowblue/90 disabled:cursor-not-allowed disabled:bg-slate-300",
-                                    children: loadingDraw ? "Ziehe…" : remainingEntries.length ? "Nächsten Namen ziehen" : "Alles gezogen"
-                                }, void 0, false, {
-                                    fileName: "[project]/app/raffle/[id]/page.tsx",
-                                    lineNumber: 128,
-                                    columnNumber: 13
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/app/raffle/[id]/page.tsx",
-                            lineNumber: 117,
-                            columnNumber: 11
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/app/raffle/[id]/page.tsx",
-                    lineNumber: 109,
-                    columnNumber: 9
-                }, this),
-                error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "mt-6 rounded-2xl border border-red-200 bg-red-50/80 p-4 text-sm text-red-600",
-                    children: error
+        className: "min-h-screen bg-gradient-to-b from-white via-[#e9f3ff] to-[#fdfbff] pb-16 lg:h-screen lg:overflow-hidden",
+        children: [
+            showDrawAnimation && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "fixed inset-0 z-40 flex items-center justify-center bg-white/80 backdrop-blur-lg",
+                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(DotLottieReact, {
+                    src: "https://lottie.host/9b8c3dbb-a22f-4cd2-a269-e4c5b121977f/naXZ3G4pEp.lottie",
+                    loop: true,
+                    autoplay: true,
+                    className: "w-[320px] max-w-[80vw]"
                 }, void 0, false, {
                     fileName: "[project]/app/raffle/[id]/page.tsx",
-                    lineNumber: 139,
+                    lineNumber: 115,
                     columnNumber: 11
-                }, this),
-                !raffle && !isLoading && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "mt-10 rounded-3xl border border-dashed border-snowred/30 bg-white/70 p-6 text-center text-slate-500",
-                    children: [
-                        "Raffle wurde nicht gefunden. ",
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
-                            href: "/",
-                            className: "text-snowblue underline",
-                            children: "Zurück zur Übersicht"
-                        }, void 0, false, {
-                            fileName: "[project]/app/raffle/[id]/page.tsx",
-                            lineNumber: 146,
-                            columnNumber: 42
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/app/raffle/[id]/page.tsx",
-                    lineNumber: 145,
-                    columnNumber: 11
-                }, this),
-                raffle && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                    className: "mt-10 grid gap-8 lg:grid-cols-2",
-                    children: [
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
-                            className: "rounded-3xl bg-white/80 p-6 shadow-2xl shadow-snowblue/10",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-sm uppercase tracking-[0.3em] text-slate-400",
-                                    children: "Im Lostopf"
-                                }, void 0, false, {
-                                    fileName: "[project]/app/raffle/[id]/page.tsx",
-                                    lineNumber: 153,
-                                    columnNumber: 15
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                    className: "mt-2 text-2xl font-semibold text-slate-800",
-                                    children: [
-                                        remainingEntries.length,
-                                        " verbleibend"
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/app/raffle/[id]/page.tsx",
-                                    lineNumber: 154,
-                                    columnNumber: 15
-                                }, this),
-                                remainingEntries.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
-                                    children: [
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "mt-4 rounded-3xl bg-gradient-to-br from-snowblue/10 via-white to-white p-6 shadow-inner",
-                                            children: [
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "text-xs uppercase tracking-[0.4em] text-snowblue/80",
-                                                    children: "Shuffle"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/raffle/[id]/page.tsx",
-                                                    lineNumber: 159,
-                                                    columnNumber: 21
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                    className: "mt-2 text-3xl font-bold text-snowblue",
-                                                    children: activeTickerEntry?.label ?? "-"
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/raffle/[id]/page.tsx",
-                                                    lineNumber: 160,
-                                                    columnNumber: 21
-                                                }, this),
-                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                                    className: "text-xs text-slate-500",
-                                                    children: "Namen werden automatisch durchgescrollt, bis du ziehst."
-                                                }, void 0, false, {
-                                                    fileName: "[project]/app/raffle/[id]/page.tsx",
-                                                    lineNumber: 163,
-                                                    columnNumber: 21
-                                                }, this)
-                                            ]
-                                        }, void 0, true, {
-                                            fileName: "[project]/app/raffle/[id]/page.tsx",
-                                            lineNumber: 158,
-                                            columnNumber: 19
-                                        }, this),
-                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                            className: "mt-6 overflow-hidden rounded-3xl border border-slate-100 bg-white/70",
-                                            style: {
-                                                height: ITEM_HEIGHT * 3
-                                            },
-                                            children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                className: "ticker-track",
-                                                style: {
-                                                    transform: `translateY(${translateY}px)`,
-                                                    transition: "transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)"
-                                                },
-                                                children: tickerEntries.map((entry, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                                        className: "flex h-16 items-center justify-between border-b border-slate-100 px-4 text-slate-600 last:border-none",
-                                                        children: [
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                children: entry.label
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/app/raffle/[id]/page.tsx",
-                                                                lineNumber: 179,
-                                                                columnNumber: 27
-                                                            }, this),
-                                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                                className: "text-xs text-slate-400",
-                                                                children: "Im Topf"
-                                                            }, void 0, false, {
-                                                                fileName: "[project]/app/raffle/[id]/page.tsx",
-                                                                lineNumber: 180,
-                                                                columnNumber: 27
-                                                            }, this)
-                                                        ]
-                                                    }, `${entry.id}-${index}`, true, {
-                                                        fileName: "[project]/app/raffle/[id]/page.tsx",
-                                                        lineNumber: 175,
-                                                        columnNumber: 25
-                                                    }, this))
-                                            }, void 0, false, {
-                                                fileName: "[project]/app/raffle/[id]/page.tsx",
-                                                lineNumber: 167,
-                                                columnNumber: 21
-                                            }, this)
-                                        }, void 0, false, {
-                                            fileName: "[project]/app/raffle/[id]/page.tsx",
-                                            lineNumber: 166,
-                                            columnNumber: 19
-                                        }, this)
-                                    ]
-                                }, void 0, true) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
-                                    className: "mt-6 rounded-3xl border border-dashed border-snowblue/40 bg-white/70 p-6 text-center text-slate-500",
-                                    children: "Alle Namen wurden gezogen. Du kannst oben eine neue Runde starten."
-                                }, void 0, false, {
-                                    fileName: "[project]/app/raffle/[id]/page.tsx",
-                                    lineNumber: 187,
-                                    columnNumber: 17
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/app/raffle/[id]/page.tsx",
-                            lineNumber: 152,
-                            columnNumber: 13
-                        }, this),
-                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
-                            className: "rounded-3xl bg-white/85 p-6 shadow-xl shadow-snowblue/10",
-                            children: [
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
-                                    className: "text-sm uppercase tracking-[0.3em] text-slate-400",
-                                    children: "Gezogene Namen"
-                                }, void 0, false, {
-                                    fileName: "[project]/app/raffle/[id]/page.tsx",
-                                    lineNumber: 194,
-                                    columnNumber: 15
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
-                                    className: "mt-2 text-2xl font-semibold text-slate-800",
-                                    children: [
-                                        drawnEntries.length,
-                                        " vergeben"
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/app/raffle/[id]/page.tsx",
-                                    lineNumber: 195,
-                                    columnNumber: 15
-                                }, this),
-                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
-                                    className: "mt-4 space-y-3",
-                                    children: [
-                                        drawnEntries.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                                            className: "rounded-2xl border border-dashed border-slate-200 bg-white/60 p-4 text-sm text-slate-500",
-                                            children: "Noch kein Name gezogen."
-                                        }, void 0, false, {
-                                            fileName: "[project]/app/raffle/[id]/page.tsx",
-                                            lineNumber: 199,
-                                            columnNumber: 19
-                                        }, this),
-                                        drawnEntries.map((entry)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
-                                                className: `flex items-center justify-between rounded-2xl border border-slate-100 px-4 py-3 text-sm ${highlighted === entry.id ? "bg-snowyellow/50" : "bg-white"}`,
+                }, this)
+            }, void 0, false, {
+                fileName: "[project]/app/raffle/[id]/page.tsx",
+                lineNumber: 114,
+                columnNumber: 9
+            }, this),
+            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                className: "mx-auto max-w-6xl px-4 pt-8",
+                children: [
+                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "flex flex-wrap items-start justify-between gap-4",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h1", {
+                                        className: "mt-2 text-3xl font-semibold text-snowblue",
+                                        children: raffle ? raffle.name : isLoading ? "Lade…" : "Unbekanntes Raffle"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/raffle/[id]/page.tsx",
+                                        lineNumber: 126,
+                                        columnNumber: 13
+                                    }, this),
+                                    raffle?.description && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        className: "text-sm text-slate-500",
+                                        children: raffle.description
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/raffle/[id]/page.tsx",
+                                        lineNumber: 129,
+                                        columnNumber: 37
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/app/raffle/[id]/page.tsx",
+                                lineNumber: 125,
+                                columnNumber: 11
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                className: "flex flex-wrap gap-3 text-sm",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                        href: "/",
+                                        className: "rounded-full border border-snowblue/30 px-4 py-2 text-snowblue hover:border-snowblue",
+                                        children: "Zur Übersicht"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/raffle/[id]/page.tsx",
+                                        lineNumber: 132,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        onClick: handleReset,
+                                        disabled: !raffle || loadingReset,
+                                        className: "rounded-full border border-snowblue/40 px-4 py-2 text-snowblue transition hover:border-snowblue disabled:cursor-not-allowed disabled:border-slate-200 disabled:text-slate-300",
+                                        children: loadingReset ? "Setze zurück…" : "Topf leeren"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/raffle/[id]/page.tsx",
+                                        lineNumber: 135,
+                                        columnNumber: 13
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("button", {
+                                        onClick: handleDraw,
+                                        disabled: !raffle || !remainingEntries.length || loadingDraw,
+                                        className: "rounded-full bg-snowblue px-5 py-2 font-semibold text-white transition hover:bg-snowblue/90 disabled:cursor-not-allowed disabled:bg-slate-300",
+                                        children: loadingDraw ? "Ziehe…" : remainingEntries.length ? "Nächsten Namen ziehen" : "Alles gezogen"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/raffle/[id]/page.tsx",
+                                        lineNumber: 142,
+                                        columnNumber: 13
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/app/raffle/[id]/page.tsx",
+                                lineNumber: 131,
+                                columnNumber: 11
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/app/raffle/[id]/page.tsx",
+                        lineNumber: 124,
+                        columnNumber: 9
+                    }, this),
+                    error && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "mt-6 rounded-2xl border border-red-200 bg-red-50/80 p-4 text-sm text-red-600",
+                        children: error
+                    }, void 0, false, {
+                        fileName: "[project]/app/raffle/[id]/page.tsx",
+                        lineNumber: 153,
+                        columnNumber: 11
+                    }, this),
+                    !raffle && !isLoading && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "mt-10 rounded-3xl border border-dashed border-snowred/30 bg-white/70 p-6 text-center text-slate-500",
+                        children: [
+                            "Raffle wurde nicht gefunden. ",
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$client$2f$app$2d$dir$2f$link$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["default"], {
+                                href: "/",
+                                className: "text-snowblue underline",
+                                children: "Zurück zur Übersicht"
+                            }, void 0, false, {
+                                fileName: "[project]/app/raffle/[id]/page.tsx",
+                                lineNumber: 160,
+                                columnNumber: 42
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/app/raffle/[id]/page.tsx",
+                        lineNumber: 159,
+                        columnNumber: 11
+                    }, this),
+                    raffle && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                        className: "mt-10 grid gap-8 lg:grid-cols-2 lg:h-[calc(100vh-220px)]",
+                        children: [
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
+                                className: "rounded-3xl bg-white/80 p-6 shadow-2xl shadow-snowblue/10",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        className: "text-sm uppercase tracking-[0.3em] text-slate-400",
+                                        children: "Im Lostopf"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/raffle/[id]/page.tsx",
+                                        lineNumber: 167,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                        className: "mt-2 text-2xl font-semibold text-slate-800",
+                                        children: [
+                                            remainingEntries.length,
+                                            " verbleibend"
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/app/raffle/[id]/page.tsx",
+                                        lineNumber: 168,
+                                        columnNumber: 15
+                                    }, this),
+                                    remainingEntries.length > 0 ? /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])(__TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["Fragment"], {
+                                        children: [
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "mt-4 rounded-3xl bg-gradient-to-br from-snowblue/10 via-white to-white p-6 shadow-inner",
                                                 children: [
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "font-semibold text-slate-700",
-                                                        children: [
-                                                            "#",
-                                                            entry.drawIndex,
-                                                            " – ",
-                                                            entry.label
-                                                        ]
-                                                    }, void 0, true, {
-                                                        fileName: "[project]/app/raffle/[id]/page.tsx",
-                                                        lineNumber: 211,
-                                                        columnNumber: 21
-                                                    }, this),
-                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
-                                                        className: "text-xs text-slate-400",
-                                                        children: entry.drawnAt ? new Date(entry.drawnAt).toLocaleTimeString("de-CH", {
-                                                            hour: "2-digit",
-                                                            minute: "2-digit"
-                                                        }) : ""
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                                        className: "text-xs uppercase tracking-[0.4em] text-snowblue/80",
+                                                        children: "Zufalls Auswahl"
                                                     }, void 0, false, {
                                                         fileName: "[project]/app/raffle/[id]/page.tsx",
-                                                        lineNumber: 212,
+                                                        lineNumber: 173,
+                                                        columnNumber: 21
+                                                    }, this),
+                                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                        className: "mt-2 text-3xl font-bold text-snowblue",
+                                                        children: activeTickerEntry?.label ?? "-"
+                                                    }, void 0, false, {
+                                                        fileName: "[project]/app/raffle/[id]/page.tsx",
+                                                        lineNumber: 174,
                                                         columnNumber: 21
                                                     }, this)
                                                 ]
-                                            }, entry.id, true, {
+                                            }, void 0, true, {
                                                 fileName: "[project]/app/raffle/[id]/page.tsx",
-                                                lineNumber: 205,
+                                                lineNumber: 172,
                                                 columnNumber: 19
-                                            }, this))
-                                    ]
-                                }, void 0, true, {
-                                    fileName: "[project]/app/raffle/[id]/page.tsx",
-                                    lineNumber: 197,
-                                    columnNumber: 15
-                                }, this)
-                            ]
-                        }, void 0, true, {
-                            fileName: "[project]/app/raffle/[id]/page.tsx",
-                            lineNumber: 193,
-                            columnNumber: 13
-                        }, this)
-                    ]
-                }, void 0, true, {
-                    fileName: "[project]/app/raffle/[id]/page.tsx",
-                    lineNumber: 151,
-                    columnNumber: 11
-                }, this)
-            ]
-        }, void 0, true, {
-            fileName: "[project]/app/raffle/[id]/page.tsx",
-            lineNumber: 108,
-            columnNumber: 7
-        }, this)
-    }, void 0, false, {
+                                            }, this),
+                                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                className: "mt-6 overflow-hidden rounded-3xl border border-slate-100 bg-white/70",
+                                                style: {
+                                                    height: ITEM_HEIGHT * 3
+                                                },
+                                                children: /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                    className: "ticker-track",
+                                                    style: {
+                                                        transform: `translateY(${translateY}px)`,
+                                                        transition: "transform 0.8s cubic-bezier(0.4, 0, 0.2, 1)"
+                                                    },
+                                                    children: tickerEntries.map((entry, index)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                                            className: "flex h-16 items-center justify-between border-b border-slate-100 px-4 text-slate-600 last:border-none",
+                                                            children: [
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                    children: entry.label
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/app/raffle/[id]/page.tsx",
+                                                                    lineNumber: 192,
+                                                                    columnNumber: 27
+                                                                }, this),
+                                                                /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                                    className: "text-xs text-slate-400",
+                                                                    children: "Im Topf"
+                                                                }, void 0, false, {
+                                                                    fileName: "[project]/app/raffle/[id]/page.tsx",
+                                                                    lineNumber: 193,
+                                                                    columnNumber: 27
+                                                                }, this)
+                                                            ]
+                                                        }, `${entry.id}-${index}`, true, {
+                                                            fileName: "[project]/app/raffle/[id]/page.tsx",
+                                                            lineNumber: 188,
+                                                            columnNumber: 25
+                                                        }, this))
+                                                }, void 0, false, {
+                                                    fileName: "[project]/app/raffle/[id]/page.tsx",
+                                                    lineNumber: 180,
+                                                    columnNumber: 21
+                                                }, this)
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/raffle/[id]/page.tsx",
+                                                lineNumber: 179,
+                                                columnNumber: 19
+                                            }, this)
+                                        ]
+                                    }, void 0, true) : /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("div", {
+                                        className: "mt-6 rounded-3xl border border-dashed border-snowblue/40 bg-white/70 p-6 text-center text-slate-500",
+                                        children: "Alle Teams wurden gezogen. Du kannst oben eine neue Runde starten."
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/raffle/[id]/page.tsx",
+                                        lineNumber: 200,
+                                        columnNumber: 17
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/app/raffle/[id]/page.tsx",
+                                lineNumber: 166,
+                                columnNumber: 13
+                            }, this),
+                            /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("section", {
+                                className: "rounded-3xl bg-white/85 p-6 shadow-xl shadow-snowblue/10 flex flex-col",
+                                children: [
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("p", {
+                                        className: "text-sm uppercase tracking-[0.3em] text-slate-400",
+                                        children: "Gezogene Teams"
+                                    }, void 0, false, {
+                                        fileName: "[project]/app/raffle/[id]/page.tsx",
+                                        lineNumber: 207,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("h2", {
+                                        className: "mt-2 text-2xl font-semibold text-slate-800",
+                                        children: [
+                                            drawnEntries.length,
+                                            " vergeben"
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/app/raffle/[id]/page.tsx",
+                                        lineNumber: 208,
+                                        columnNumber: 15
+                                    }, this),
+                                    /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("ul", {
+                                        className: "mt-4 space-y-3 overflow-y-auto pr-2 flex-1",
+                                        children: [
+                                            drawnEntries.length === 0 && /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                                className: "rounded-2xl border border-dashed border-slate-200 bg-white/60 p-4 text-sm text-slate-500",
+                                                children: "Noch kein Team gezogen."
+                                            }, void 0, false, {
+                                                fileName: "[project]/app/raffle/[id]/page.tsx",
+                                                lineNumber: 212,
+                                                columnNumber: 19
+                                            }, this),
+                                            drawnEntries.map((entry)=>/*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("li", {
+                                                    className: `flex items-center justify-between rounded-2xl border border-slate-100 px-4 py-3 text-sm ${highlighted === entry.id ? "bg-snowyellow/50" : "bg-white"}`,
+                                                    children: [
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            className: "font-semibold text-slate-700",
+                                                            children: [
+                                                                "#",
+                                                                entry.drawIndex,
+                                                                " – ",
+                                                                entry.label
+                                                            ]
+                                                        }, void 0, true, {
+                                                            fileName: "[project]/app/raffle/[id]/page.tsx",
+                                                            lineNumber: 224,
+                                                            columnNumber: 21
+                                                        }, this),
+                                                        /*#__PURE__*/ (0, __TURBOPACK__imported__module__$5b$project$5d2f$node_modules$2f$next$2f$dist$2f$server$2f$route$2d$modules$2f$app$2d$page$2f$vendored$2f$ssr$2f$react$2d$jsx$2d$dev$2d$runtime$2e$js__$5b$app$2d$ssr$5d$__$28$ecmascript$29$__["jsxDEV"])("span", {
+                                                            className: "text-xs text-slate-400",
+                                                            children: entry.drawnAt ? new Date(entry.drawnAt).toLocaleTimeString("de-CH", {
+                                                                hour: "2-digit",
+                                                                minute: "2-digit"
+                                                            }) : ""
+                                                        }, void 0, false, {
+                                                            fileName: "[project]/app/raffle/[id]/page.tsx",
+                                                            lineNumber: 225,
+                                                            columnNumber: 21
+                                                        }, this)
+                                                    ]
+                                                }, entry.id, true, {
+                                                    fileName: "[project]/app/raffle/[id]/page.tsx",
+                                                    lineNumber: 218,
+                                                    columnNumber: 19
+                                                }, this))
+                                        ]
+                                    }, void 0, true, {
+                                        fileName: "[project]/app/raffle/[id]/page.tsx",
+                                        lineNumber: 210,
+                                        columnNumber: 15
+                                    }, this)
+                                ]
+                            }, void 0, true, {
+                                fileName: "[project]/app/raffle/[id]/page.tsx",
+                                lineNumber: 206,
+                                columnNumber: 13
+                            }, this)
+                        ]
+                    }, void 0, true, {
+                        fileName: "[project]/app/raffle/[id]/page.tsx",
+                        lineNumber: 165,
+                        columnNumber: 11
+                    }, this)
+                ]
+            }, void 0, true, {
+                fileName: "[project]/app/raffle/[id]/page.tsx",
+                lineNumber: 123,
+                columnNumber: 7
+            }, this)
+        ]
+    }, void 0, true, {
         fileName: "[project]/app/raffle/[id]/page.tsx",
-        lineNumber: 107,
+        lineNumber: 112,
         columnNumber: 5
     }, this);
 }

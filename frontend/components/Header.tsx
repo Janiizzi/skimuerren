@@ -8,7 +8,7 @@ const Header = () => {
         <header className="mx-auto mt-4 flex max-w-6xl items-center justify-between rounded-3xl bg-white/70 px-6 py-4 shadow-lg shadow-snowblue/10 backdrop-blur">
             <Link href="/" className="flex items-center gap-3 text-2xl font-semibold text-snowblue">
                 <Image src="/skischule_muerren_de.png" alt="Skischule Mürren Logo" width={42} height={42} />
-                Skischule Mürren
+                Swiss Snow Happening 2026
             </Link>
             <nav className="flex items-center gap-3 text-sm font-semibold">
                 {pages.map((page) => (

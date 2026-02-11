@@ -28,7 +28,7 @@ export default function HomePage() {
   }, [loadRaffles])
 
   return (
-    <main className="min-h-screen bg-gradient-to-b from-[#dff0ff] via-[#eff7ff] to-white pb-16">
+    <main className="min-h-screen bg-gradient-to-b from-white via-[#e9f3ff] to-[#fdfbff] pb-16">
       <div className="mx-auto max-w-6xl px-4 pt-10">
         <section className="rounded-3xl bg-white/70 p-6 shadow-2xl shadow-snowblue/20 backdrop-blur-md">
           <p className="text-sm uppercase tracking-[0.2em] text-snowblue/80">Skischule Mürren</p>

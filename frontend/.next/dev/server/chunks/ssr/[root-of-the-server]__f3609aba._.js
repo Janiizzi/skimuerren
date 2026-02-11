@@ -106,7 +106,7 @@ const Header = ()=>{
                         lineNumber: 10,
                         columnNumber: 17
                     }, ("TURBOPACK compile-time value", void 0)),
-                    "Skischule Mürren"
+                    "Swiss Snow Happening 2026"
                 ]
             }, void 0, true, {
                 fileName: "[project]/components/Header.tsx",
@@ -415,6 +415,7 @@ const imageConfigDefault = {
         'image/webp'
     ],
     maximumRedirects: 3,
+    maximumResponseBody: 50000000,
     dangerouslyAllowLocalIP: false,
     dangerouslyAllowSVG: false,
     contentSecurityPolicy: `script-src 'none'; frame-src 'none'; sandbox;`,
@@ -2868,11 +2869,7 @@ function getImageProps(imgProps) {
                 ("TURBOPACK compile-time value", 384)
             ]),
             "qualities": ("TURBOPACK compile-time value", [
-                ("TURBOPACK compile-time value", 75),
-                ("TURBOPACK compile-time value", 70),
-                ("TURBOPACK compile-time value", 70),
-                ("TURBOPACK compile-time value", 70),
-                ("TURBOPACK compile-time value", 70)
+                ("TURBOPACK compile-time value", 75)
             ]),
             "path": ("TURBOPACK compile-time value", "/_next/image"),
             "loader": ("TURBOPACK compile-time value", "default"),
