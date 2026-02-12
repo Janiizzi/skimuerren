@@ -1,36 +1,53 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+## Overview
 
-## Getting Started
+This repo contains the **Skimuerren** raffle app: a Next.js frontend (App Router) and a FastAPI backend that stores raffles on disk. Both services are wired together with Docker Compose and proxied behind Caddy in production.
 
-First, run the development server:
+## Local development
 
 ```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
+docker compose up --build
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+- Frontend: http://localhost:3000
+- Backend API: http://localhost:8000
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Hot reloading is enabled because the project directory is mounted into the containers.
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## Password protection
 
-## Learn More
+The entire Next.js site is protected by HTTP Basic Auth via `frontend/middleware.ts`. Credentials are defined through the `BASIC_AUTH_USERS` environment variable that is read at build/runtime.
 
-To learn more about Next.js, take a look at the following resources:
+```
+BASIC_AUTH_USERS=user1:password1,user2:supersafe
+```
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+- Multiple accounts can be defined by separating entries with commas.
+- Each entry must follow `username:password` (no additional colons).
+- If the variable is unset or empty, the middleware is skipped.
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+### Docker Compose
 
-## Deploy on Vercel
+`docker-compose.yml` already exposes a placeholder:
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+```
+environment:
+	- BASIC_AUTH_USERS=admin:changeme
+```
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+Change this before deploying anywhere outside of your laptop. You can also move the variable into an `.env` file that Docker Compose loads automatically.
+
+### Without Docker
+
+Create a `.env.local` inside `frontend/` and add the same variable. Next.js will pick it up when you run `npm run dev`.
+
+## Useful commands
+
+```bash
+# Frontend
+cd frontend && npm install && npm run dev
+
+# Backend
+cd backend && uvicorn main:app --reload --host 0.0.0.0 --port 8000
+```
+
+Make sure the frontend talks to the correct backend URL via `NEXT_PUBLIC_API_URL` when running outside of Docker.

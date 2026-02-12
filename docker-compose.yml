@@ -15,6 +15,7 @@ services:
     environment:
       - NEXT_PUBLIC_API_URL=http://localhost:8000
       - NODE_ENV=development
+      - BASIC_AUTH_USERS=admin:changeme
     volumes:
       - ./frontend:/app
       - /app/node_modules
