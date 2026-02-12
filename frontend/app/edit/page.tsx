@@ -1,6 +1,6 @@
 "use client"
 
-import { useCallback, useEffect, useMemo, useState } from "react"
+import { KeyboardEvent, useCallback, useEffect, useMemo, useRef, useState } from "react"
 import Link from "next/link"
 import { createRaffle, listRaffles, updateRaffle } from "@/lib/api/raffle"
 import { Raffle, RaffleEntryPayload } from "@/types/raffle"
@@ -34,11 +34,12 @@ const EditPage = () => {
   const [loading, setLoading] = useState(false)
   const [message, setMessage] = useState<string | null>(null)
   const [error, setError] = useState<string | null>(null)
+  const labelInputRefs = useRef<Record<string, HTMLInputElement | null>>({})
 
   const hasValidEntries = useMemo(() => entries.some((entry) => entry.label.trim().length > 0), [entries])
 
   const loadRaffles = useCallback(() => {
-    listRaffles().then(setRaffles).catch(() => setError("Konnte bestehende Raffles nicht laden"))
+    listRaffles().then(setRaffles).catch(() => setError("Konnte bestehende Losungen nicht laden"))
   }, [])
 
   useEffect(() => {
@@ -54,10 +55,51 @@ const EditPage = () => {
   }
 
   const handleEntryChange = (key: string, field: "label" | "imageUrl", value: string) => {
-    setEntries((prev) => prev.map((entry) => (entry.key === key ? { ...entry, [field]: value } : entry)))
+    setEntries((prev) => {
+      const updated = prev.map((entry) => (entry.key === key ? { ...entry, [field]: value } : entry))
+
+      const isEditingLast = key === prev[prev.length - 1]?.key
+      if (field === "label" && isEditingLast && value.trim().length > 0) {
+        const lastEntry = updated[updated.length - 1]
+        if (lastEntry.key === key) {
+          return [...updated, newEntry()]
+        }
+      }
+
+      return updated
+    })
+  }
+
+  const focusNextEntry = useCallback(
+    (currentKey: string) => {
+      const currentIndex = entries.findIndex((entry) => entry.key === currentKey)
+      if (currentIndex === -1) {
+        return
+      }
+      const nextEntry = entries[currentIndex + 1]
+      if (nextEntry) {
+        labelInputRefs.current[nextEntry.key]?.focus()
+      }
+    },
+    [entries]
+  )
+
+  const handleEntryKeyDown = (event: KeyboardEvent<HTMLInputElement>, key: string) => {
+    if (event.key === "Enter") {
+      event.preventDefault()
+      focusNextEntry(key)
+    }
   }
 
   const addEntryRow = () => setEntries((prev) => [...prev, newEntry()])
+
+  const registerLabelRef = useCallback((key: string, node: HTMLInputElement | null) => {
+    if (node) {
+      labelInputRefs.current[key] = node
+    } else {
+      delete labelInputRefs.current[key]
+    }
+  }, [])
 
   const removeEntryRow = (key: string) => {
     setEntries((prev) => (prev.length === 1 ? prev : prev.filter((entry) => entry.key !== key)))
@@ -68,7 +110,7 @@ const EditPage = () => {
     setError(null)
     setMessage(null)
     if (!hasValidEntries) {
-      setError("Bitte mindestens einen Namen hinzufügen.")
+      setError("Bitte mindestens ein Team hinzufügen.")
       return
     }
 
@@ -87,7 +129,7 @@ const EditPage = () => {
     }
 
     if (!payload.name) {
-      setError("Bitte einen Namen für das Raffle vergeben.")
+      setError("Bitte ein Team für die Losung vergeben.")
       return
     }
 
@@ -98,7 +140,7 @@ const EditPage = () => {
         setMessage("Raffle aktualisiert ✨")
       } else {
         await createRaffle(payload)
-        setMessage("Raffle erstellt ❄️")
+        setMessage("Losung erstellt ❄️")
         resetForm()
       }
       loadRaffles()
@@ -124,7 +166,7 @@ const EditPage = () => {
         <header className="mb-8 rounded-3xl bg-white/80 p-6 shadow-xl shadow-snowblue/10 backdrop-blur">
           <p className="text-sm uppercase tracking-[0.3em] text-slate-500">Editor</p>
           <h1 className="mt-2 text-3xl font-semibold text-snowblue">
-            {editingId ? "Raffle bearbeiten" : "Neues Raffle erstellen"}
+            {editingId ? "Losung bearbeiten" : "Neue Losung erstellen"}
           </h1>
           {editingId && (
             <button className="mt-3 text-sm text-snowblue underline" onClick={resetForm}>
@@ -160,9 +202,9 @@ const EditPage = () => {
 
           <section>
             <div className="flex items-center justify-between">
-              <h2 className="text-lg font-semibold text-slate-700">Teilnehmer:innen</h2>
-              <button type="button" onClick={addEntryRow} className="rounded-full border border-dashed border-snowblue/50 px-4 py-1 text-sm text-snowblue">
-                + Person
+              <h2 className="text-lg font-semibold text-slate-700">Einträge</h2>
+              <button type="button" onClick={addEntryRow} className="rounded-full border border-dashed border-snowblue/50 px-4 py-1 text-sm text-snowblue hover:border-snowblue">
+                + Hinzufügen
               </button>
             </div>
             <div className="mt-4 space-y-3">
@@ -172,8 +214,10 @@ const EditPage = () => {
                     type="text"
                     value={entry.label}
                     onChange={(event) => handleEntryChange(entry.key, "label", event.target.value)}
+                    onKeyDown={(event) => handleEntryKeyDown(event, entry.key)}
+                    ref={(node) => registerLabelRef(entry.key, node)}
                     className="flex-1 rounded-xl border border-slate-200 px-4 py-2 text-sm focus:border-snowblue focus:outline-none"
-                    placeholder="Name"
+                    placeholder="Team"
                   />
                   <input
                     type="text"
@@ -198,13 +242,13 @@ const EditPage = () => {
             disabled={loading}
             className="w-full rounded-full bg-snowblue py-3 text-lg font-semibold text-white transition hover:bg-snowblue/90 disabled:cursor-not-allowed disabled:bg-slate-300"
           >
-            {loading ? "Speichere…" : editingId ? "Raffle aktualisieren" : "Raffle speichern"}
+            {loading ? "Speichere…" : editingId ? "Losung aktualisieren" : "Losung speichern"}
           </button>
         </form>
 
         <section className="mt-12">
           <div className="flex items-center justify-between">
-            <h2 className="text-xl font-semibold text-slate-700">Bestehende Raffles</h2>
+            <h2 className="text-xl font-semibold text-slate-700">Bestehende Losungen</h2>
             <Link href="/" className="text-sm text-snowblue underline">
               Zur Auslosung
             </Link>
@@ -215,7 +259,7 @@ const EditPage = () => {
                 <div className="flex items-center justify-between">
                   <div>
                     <h3 className="text-lg font-semibold text-slate-800">{raffle.name}</h3>
-                    <p className="text-sm text-slate-500">{raffle.entries.length} Namen</p>
+                    <p className="text-sm text-slate-500">{raffle.entries.length} Einträge</p>
                   </div>
                   <button className="text-sm text-snowblue underline" onClick={() => startEditing(raffle)}>
                     Bearbeiten

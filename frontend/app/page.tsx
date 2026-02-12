@@ -33,10 +33,10 @@ export default function HomePage() {
         <section className="rounded-3xl bg-white/70 p-6 shadow-2xl shadow-snowblue/20 backdrop-blur-md">
           <p className="text-sm uppercase tracking-[0.2em] text-snowblue/80">Skischule Mürren</p>
           <h1 className="mt-2 text-4xl font-semibold text-snowblue drop-shadow">
-            Willkommen im Raffle-Hub
+            Willkommen im Happening-Hub
           </h1>
           <p className="mt-2 max-w-3xl text-slate-600">
-            Wähle eine Auslosung aus und öffne die animierte Ziehungsseite, um Namen nacheinander zu ziehen.
+            Wähle eine Auslosung aus und öffne die animierte Losseite, um Teams nacheinander zu ziehen.
             Jede Auslosung speichert automatisch die gezogenen Teilnehmer:innen, damit du jederzeit weitermachen kannst.
           </p>
           <div className="mt-4 flex flex-wrap gap-3 text-sm">
@@ -45,13 +45,13 @@ export default function HomePage() {
               className="rounded-full border border-snowblue/40 px-4 py-2 text-snowblue transition hover:border-snowblue"
               disabled={isLoading}
             >
-              {isLoading ? "Aktualisiere…" : "Raffles aktualisieren"}
+              {isLoading ? "Aktualisiere…" : "Losung aktualisieren"}
             </button>
             <Link
               href="/edit"
               className="rounded-full bg-snowblue px-5 py-2 font-semibold text-white transition hover:bg-snowblue/90"
             >
-              Neues Raffle anlegen
+              Neue Losung anlegen
             </Link>
           </div>
         </section>
@@ -67,7 +67,7 @@ export default function HomePage() {
             const drawnCount = raffle.entries.filter((entry) => entry.drawIndex !== undefined && entry.drawIndex !== null).length
             return (
               <div key={raffle.id} className="flex h-full flex-col rounded-3xl border border-slate-100 bg-white/80 p-5 shadow-lg shadow-snowblue/10">
-                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Raffle</p>
+                <p className="text-xs uppercase tracking-[0.3em] text-slate-400">Losung</p>
                 <h2 className="mt-1 text-2xl font-semibold text-slate-800">{raffle.name}</h2>
                 {raffle.description && <p className="mt-1 text-sm text-slate-500">{raffle.description}</p>}
                 <div className="mt-4 rounded-2xl bg-slate-50/80 p-3 text-sm text-slate-600">
@@ -99,7 +99,7 @@ export default function HomePage() {
 
         {!raffles.length && !isLoading && (
           <div className="mt-10 rounded-3xl border border-dashed border-snowblue/30 bg-white/70 p-8 text-center text-slate-500">
-            Noch keine Raffles vorhanden. <Link href="/edit" className="text-snowblue underline">Lege jetzt eines an</Link> und starte danach die Auslosung.
+            Noch keine Losung vorhanden. <Link href="/edit" className="text-snowblue underline">Lege jetzt eines an</Link> und starte danach die Auslosung.
           </div>
         )}
       </div>
