@@ -41,3 +41,11 @@ def save_raffle(raffle: Raffle) -> Raffle:
         raffles.append(raffle)
     _write_all(raffles)
     return raffle
+
+
+def delete_raffle(raffle_id: str) -> None:
+    raffles = _read_all()
+    filtered = [raffle for raffle in raffles if raffle.id != raffle_id]
+    if len(filtered) == len(raffles):
+        return
+    _write_all(filtered)

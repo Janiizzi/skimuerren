@@ -2,7 +2,7 @@
 
 import { KeyboardEvent, useCallback, useEffect, useMemo, useRef, useState } from "react"
 import Link from "next/link"
-import { createRaffle, listRaffles, updateRaffle } from "@/lib/api/raffle"
+import { createRaffle, deleteRaffle, listRaffles, updateRaffle } from "@/lib/api/raffle"
 import { Raffle, RaffleEntryPayload } from "@/types/raffle"
 
 type DraftEntry = {
@@ -46,13 +46,13 @@ const EditPage = () => {
     loadRaffles()
   }, [loadRaffles])
 
-  const resetForm = () => {
+  const resetForm = useCallback(() => {
     setForm({ name: "", description: "" })
     setEntries([newEntry()])
     setEditingId(null)
     setMessage(null)
     setError(null)
-  }
+  }, [])
 
   const handleEntryChange = (key: string, field: "label" | "imageUrl", value: string) => {
     setEntries((prev) => {
@@ -151,6 +151,31 @@ const EditPage = () => {
     }
   }
 
+  const handleDeleteRaffle = useCallback(async () => {
+    if (!editingId) {
+      return
+    }
+    const confirmed = window.confirm("Diese Losung wirklich löschen? Dieser Schritt kann nicht rückgängig gemacht werden.")
+    if (!confirmed) {
+      return
+    }
+    const idToDelete = editingId
+    setLoading(true)
+    setError(null)
+    setMessage(null)
+    resetForm()
+    window.scrollTo({ top: 0, behavior: "smooth" })
+    try {
+      await deleteRaffle(idToDelete)
+      loadRaffles()
+      setMessage("Losung gelöscht 🗑️")
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Konnte nicht löschen")
+    } finally {
+      setLoading(false)
+    }
+  }, [editingId, loadRaffles, resetForm])
+
   const startEditing = (raffle: Raffle) => {
     setMessage(null)
     setError(null)
@@ -169,9 +194,15 @@ const EditPage = () => {
             {editingId ? "Losung bearbeiten" : "Neue Losung erstellen"}
           </h1>
           {editingId && (
-            <button className="mt-3 text-sm text-snowblue underline" onClick={resetForm}>
-              Bearbeitung abbrechen
-            </button>
+            <div className="mt-3 flex flex-wrap gap-4 text-sm">
+              <button className="text-snowblue underline" onClick={resetForm} type="button">
+                Bearbeitung abbrechen
+              </button>
+              <button className="flex items-center gap-2 text-snowred underline" type="button" onClick={handleDeleteRaffle} disabled={loading}>
+                <i className="fa-solid fa-trash" aria-hidden="true"></i>
+                Losung löschen
+              </button>
+            </div>
           )}
         </header>
 

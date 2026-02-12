@@ -7,6 +7,7 @@ from fastapi import FastAPI, HTTPException, status
 from fastapi.middleware.cors import CORSMiddleware
 
 from models import DrawResult, Raffle, RaffleEntry, RafflePayload
+from storage import delete_raffle as storage_delete_raffle
 from storage import get_raffle, list_raffles, save_raffle
 
 _default_origins = os.environ.get("FRONTEND_ORIGINS", "http://localhost:3000")
@@ -86,6 +87,12 @@ def update_raffle(raffle_id: str, payload: RafflePayload):
         lastDrawnEntryId=raffle.lastDrawnEntryId if last_entry_preserved else None,
     )
     return save_raffle(updated)
+
+
+@app.delete("/raffles/{raffle_id}", status_code=status.HTTP_204_NO_CONTENT)
+def delete_raffle_endpoint(raffle_id: str):
+    _require_raffle(raffle_id)
+    storage_delete_raffle(raffle_id)
 
 
 @app.post("/raffles/{raffle_id}/draw", response_model=DrawResult)

@@ -23,6 +23,12 @@ export function updateRaffle(id: string, payload: RafflePayload) {
   })
 }
 
+export function deleteRaffle(id: string) {
+  return apiFetch<void>(`/raffles/${id}`, {
+    method: "DELETE",
+  })
+}
+
 export function drawEntry(id: string) {
   return apiFetch<DrawResponse>(`/raffles/${id}/draw`, {
     method: "POST",
