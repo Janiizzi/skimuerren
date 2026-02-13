@@ -29,15 +29,10 @@ export default function RaffleDetailPage() {
   const previousOverflowRef = useRef<string>("")
   const [currentDrawnInfo, setCurrentDrawnInfo] = useState<{ label: string; drawIndex: number | null } | null>(null)
   const introTimeoutRef = useRef<NodeJS.Timeout | null>(null)
-  const outroTimeoutRef = useRef<NodeJS.Timeout | null>(null)
   const clearOverlayTimers = useCallback(() => {
     if (introTimeoutRef.current) {
       clearTimeout(introTimeoutRef.current)
       introTimeoutRef.current = null
-    }
-    if (outroTimeoutRef.current) {
-      clearTimeout(outroTimeoutRef.current)
-      outroTimeoutRef.current = null
     }
   }, [])
 
@@ -147,10 +142,6 @@ export default function RaffleDetailPage() {
     introTimeoutRef.current = setTimeout(() => {
       setAnimationPhase("celebration")
     }, 2000)
-    outroTimeoutRef.current = setTimeout(() => {
-      setShowDrawOverlay(false)
-      setAnimationPhase(null)
-    }, 6000)
   }, [clearOverlayTimers])
 
   const stopCelebrationSequence = useCallback(() => {
