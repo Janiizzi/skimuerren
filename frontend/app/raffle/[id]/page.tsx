@@ -4,6 +4,8 @@ import Link from "next/link"
 import { useParams } from "next/navigation"
 import { useCallback, useEffect, useMemo, useRef, useState } from "react"
 import { DotLottieReact } from '@lottiefiles/dotlottie-react';
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { faFileExport } from "@fortawesome/free-solid-svg-icons"
 import { drawEntry, getRaffle, resetRaffle } from "@/lib/api/raffle"
 import { Raffle } from "@/types/raffle"
 
@@ -199,6 +201,41 @@ export default function RaffleDetailPage() {
     }
   }
 
+  const handleExportCsv = useCallback(() => {
+    if (!raffle || typeof window === "undefined") {
+      return
+    }
+
+    const headers = ["id", "label", "imageUrl", "drawIndex", "drawnAt"] as const
+    const sortedEntries = [...raffle.entries]
+      .filter((entry) => entry.drawIndex !== undefined && entry.drawIndex !== null)
+      .sort((a, b) => (a.drawIndex ?? 0) - (b.drawIndex ?? 0))
+    if (!sortedEntries.length) {
+      return
+    }
+    const escapeValue = (value: unknown) => {
+      const stringValue = value === null || value === undefined ? "" : String(value)
+      return `"${stringValue.replace(/"/g, '""')}"`
+    }
+    const csvLines = [
+      headers.map((header) => escapeValue(header)),
+      ...sortedEntries.map((entry) =>
+        headers.map((header) => escapeValue(entry[header]))
+      ),
+    ]
+      .map((line) => line.join(","))
+      .join("\n")
+
+    const blob = new Blob([csvLines], { type: "text/csv;charset=utf-8;" })
+    const url = URL.createObjectURL(blob)
+    const link = document.createElement("a")
+    link.href = url
+    const sanitizedName = raffle.name.replace(/\s+/g, "_").replace(/[^a-zA-Z0-9_-]/g, "") || "raffle"
+    link.download = `${sanitizedName}_entries.csv`
+    link.click()
+    URL.revokeObjectURL(url)
+  }, [raffle])
+
   const offset = remainingEntries.length ? tickerStep % remainingEntries.length : 0
   const translateY = -(offset * ITEM_HEIGHT)
   const tickerEntries = remainingEntries.length ? [...remainingEntries, ...remainingEntries] : []
@@ -331,8 +368,21 @@ export default function RaffleDetailPage() {
             </section>
 
             <section className="rounded-3xl bg-white/85 p-6 shadow-xl shadow-snowblue/10 flex flex-col lg:min-h-0 lg:overflow-hidden">
-              <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Gezogene Teams</p>
-              <h2 className="mt-2 text-2xl font-semibold text-slate-800">{drawnEntries.length} vergeben</h2>
+              <div className="flex flex-wrap items-center justify-between gap-3">
+                <div>
+                  <p className="text-sm uppercase tracking-[0.3em] text-slate-400">Gezogene Teams</p>
+                  <h2 className="mt-2 text-2xl font-semibold text-slate-800">{drawnEntries.length} vergeben</h2>
+                </div>
+                <button
+                  type="button"
+                  onClick={handleExportCsv}
+                  disabled={!raffle || drawnEntries.length === 0}
+                  className="flex items-center gap-2 rounded-full bg-snowblue/10 px-5 py-2 text-sm font-semibold text-snowblue transition hover:bg-snowblue/20 disabled:cursor-not-allowed disabled:bg-slate-200/40 disabled:text-slate-400"
+                >
+                  <FontAwesomeIcon icon={faFileExport} />
+                  
+                </button>
+              </div>
 
               <ul
                 ref={drawnListRef}

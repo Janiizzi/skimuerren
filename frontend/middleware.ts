@@ -6,8 +6,10 @@ type Credential = {
   password: string
 }
 
-const parseCredentials = (): Credential[] => {
-  const raw = process.env.BASIC_AUTH_USERS ?? ""
+const parseCredentials = (raw: string | undefined): Credential[] => {
+  if (!raw) {
+    return []
+  }
   return raw
     .split(",")
     .map((pair) => pair.trim())
@@ -22,8 +24,6 @@ const parseCredentials = (): Credential[] => {
     .filter((value): value is Credential => value !== null)
 }
 
-const allowedCredentials = parseCredentials()
-
 const unauthorizedResponse = () => {
   return new NextResponse("Authentication required", {
     status: 401,
@@ -34,6 +34,7 @@ const unauthorizedResponse = () => {
 }
 
 export function middleware(request: NextRequest) {
+  const allowedCredentials = parseCredentials(process.env.BASIC_AUTH_USERS)
   if (!allowedCredentials.length) {
     return NextResponse.next()
   }
