@@ -10,7 +10,7 @@ import { drawEntry, getRaffle, resetRaffle } from "@/lib/api/raffle"
 import { Raffle } from "@/types/raffle"
 
 const ITEM_HEIGHT = 64
-const CELEBRATION_VIDEO_SRC = process.env.NEXT_PUBLIC_CELEBRATION_VIDEO || "/snowli-ski.mp4"
+const CELEBRATION_VIDEO_SRC = process.env.NEXT_PUBLIC_CELEBRATION_VIDEO || "/snowli-ski.mov"
 
 export default function RaffleDetailPage() {
   const params = useParams()
