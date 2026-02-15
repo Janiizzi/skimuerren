@@ -10,6 +10,7 @@ import { drawEntry, getRaffle, resetRaffle } from "@/lib/api/raffle"
 import { Raffle } from "@/types/raffle"
 
 const ITEM_HEIGHT = 64
+const CELEBRATION_VIDEO_SRC = process.env.NEXT_PUBLIC_CELEBRATION_VIDEO || "/snowli-ski.mp4"
 
 export default function RaffleDetailPage() {
   const params = useParams()
@@ -268,14 +269,29 @@ export default function RaffleDetailPage() {
             </div>
           )}
           {animationPhase === "celebration" && (
-            <div className="relative w-full -translate-y-16 lg:-translate-y-24">
+            <div className="relative flex w-full h-full -translate-y-10 flex-col items-center gap-8 lg:-translate-y-16">
               <DotLottieReact
                 src="https://lottie.host/958c7179-b9bd-41b5-b725-8f2b15c2ddcb/OaxiZTrcyb.lottie"
                 loop
                 autoplay
-                className="mx-auto w-[70%] lg:w-[65%]"
+                className="pointer-events-none absolute inset-0 z-30 w-full scale-100 opacity-80"
               />
-              <div className="z-50 pointer-events-none absolute inset-0 flex items-center justify-center text-center translate-y-16 lg:translate-y-20">
+              {CELEBRATION_VIDEO_SRC && (
+                <div className="z-40 flex w-full justify-center">
+                  <video
+                    className="pointer-events-none w-[min(420px,80vw)]"
+                    src={CELEBRATION_VIDEO_SRC}
+                    autoPlay
+                    loop
+                    muted
+                    playsInline
+                    onLoadedMetadata={(event) => {
+                      event.currentTarget.playbackRate = 1.8
+                    }}
+                  />
+                </div>
+              )}
+              <div className="z-40 text-center">
                 <div className="rounded-3xl text-5xl font-extrabold uppercase tracking-[0.4em] text-snowblue drop-shadow-2xl">
                   #{currentDrawnInfo.drawIndex ?? "-"} {currentDrawnInfo.label}
                 </div>

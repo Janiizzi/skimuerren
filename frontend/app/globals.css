@@ -44,16 +44,27 @@ body::after {
   position: fixed;
   inset: 0;
   pointer-events: none;
-  background-image: radial-gradient(rgba(255, 255, 255, 0.6) 1px, transparent 1px);
-  background-size: 120px 120px;
-  animation: snowfall 30s linear infinite;
-  z-index: 1;
+  z-index: 0;
+}
+
+body::before {
+  background-image:
+    radial-gradient(circle, rgba(6, 57, 124, 0.25) 1px, transparent 1px),
+    radial-gradient(circle, rgba(6, 57, 124, 0.18) 1.2px, transparent 1px),
+    radial-gradient(circle, rgba(6, 57, 124, 0.16) 0.8px, transparent 1px);
+  background-size: 140px 140px, 220px 260px, 300px 320px;
+  background-position: 15% 10%, 60% 45%, 85% 70%;
+  animation: snowfall 32s linear infinite;
 }
 
 body::after {
-  background-size: 200px 200px;
-  animation-duration: 45s;
-  opacity: 0.4;
+  background-image:
+    radial-gradient(circle, rgba(6, 57, 124, 0.15) 1px, transparent 1px),
+    radial-gradient(circle, rgba(6, 57, 124, 0.12) 1.2px, transparent 1px);
+  background-size: 180px 180px, 260px 320px;
+  background-position: 30% 65%, 80% 25%;
+  animation: snowfall 48s linear infinite;
+  opacity: 0.35;
 }
 
 @keyframes snowfall {
