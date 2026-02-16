@@ -10,7 +10,8 @@ import { drawEntry, getRaffle, resetRaffle } from "@/lib/api/raffle"
 import { Raffle } from "@/types/raffle"
 
 const ITEM_HEIGHT = 64
-const CELEBRATION_VIDEO_SRC = process.env.NEXT_PUBLIC_CELEBRATION_VIDEO || "/snowli-ski.mov"
+const CELEBRATION_VIDEO_CHROME_SRC = process.env.NEXT_PUBLIC_CELEBRATION_VIDEO_CHROME || "/snowli-ski.webm"
+const CELEBRATION_VIDEO_SAFARI_SRC = process.env.NEXT_PUBLIC_CELEBRATION_VIDEO_SAFARI || "/snowli-ski.mov"
 
 export default function RaffleDetailPage() {
   const params = useParams()
@@ -26,6 +27,7 @@ export default function RaffleDetailPage() {
   const [tickerStep, setTickerStep] = useState(0)
   const [showDrawOverlay, setShowDrawOverlay] = useState(false)
   const [animationPhase, setAnimationPhase] = useState<"intro" | "celebration" | null>(null)
+  const [videoSrc, setVideoSrc] = useState(CELEBRATION_VIDEO_CHROME_SRC)
   const drawnListRef = useRef<HTMLUListElement | null>(null)
   const [stickToBottom, setStickToBottom] = useState(true)
   const [lockBodyScroll, setLockBodyScroll] = useState(false)
@@ -68,6 +70,13 @@ export default function RaffleDetailPage() {
   useEffect(() => {
     loadRaffle()
   }, [loadRaffle])
+
+  useEffect(() => {
+    if (typeof navigator === "undefined") return
+    const userAgent = navigator.userAgent
+    const isSafari = /Safari/.test(userAgent) && !/Chrome/.test(userAgent)
+    setVideoSrc(isSafari ? CELEBRATION_VIDEO_SAFARI_SRC : CELEBRATION_VIDEO_CHROME_SRC)
+  }, [])
 
   useEffect(() => {
     return () => {
@@ -276,11 +285,11 @@ export default function RaffleDetailPage() {
                 autoplay
                 className="pointer-events-none absolute inset-0 z-30 w-full scale-100 opacity-80"
               />
-              {CELEBRATION_VIDEO_SRC && (
+              {videoSrc && (
                 <div className="z-40 flex w-full justify-center">
                   <video
                     className="pointer-events-none w-[min(420px,80vw)]"
-                    src={CELEBRATION_VIDEO_SRC}
+                    src={videoSrc}
                     autoPlay
                     loop
                     muted
