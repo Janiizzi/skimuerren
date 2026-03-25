@@ -4,8 +4,10 @@ import { config } from "@fortawesome/fontawesome-svg-core";
 import "@fortawesome/fontawesome-svg-core/styles.css";
 import "./globals.css";
 import Header from "@/components/Header";
+import DemoBanner from "@/components/DemoBanner";
 
 config.autoAddCss = false;
+const isDemoMode = !!process.env.NEXT_PUBLIC_DEMO_MODE;
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -32,6 +34,7 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
+        <DemoBanner show={isDemoMode} />
         <Header />
         {children}
       </body>
