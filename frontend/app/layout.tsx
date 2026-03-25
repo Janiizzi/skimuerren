@@ -7,7 +7,7 @@ import Header from "@/components/Header";
 import DemoBanner from "@/components/DemoBanner";
 
 config.autoAddCss = false;
-const isDemoMode = !!process.env.NEXT_PUBLIC_DEMO_MODE;
+const isDemoMode = process.env.NEXT_PUBLIC_DEMO_MODE === "true";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
